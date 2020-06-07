@@ -1,5 +1,5 @@
-# "Automatic Readme Generator"
-bischl86"
+# Automatic Readme Generator
+obischl86
 ## Table of Contents
 [Description](description)
 [Screenshot](screenshot)
@@ -9,19 +9,20 @@ bischl86"
 [Contributors](contributors)
 [Tests](tests)
 [Questions](questions)## Description {: # description }
-"This application uses the Node.js File System and Inquirer modules to create a clean and responsive readme file based. After running the script in the node terminal, the user is presented with a series of prompts relating to their project. The application then writes the information into a markdown file to be used as the user's readme."
+This application uses the Node.js File System and Inquirer modules to create a clean and responsive readme file based. After running the script in the node terminal, the user is presented with a series of prompts relating to their project. The application then writes the information into a markdown file to be used as the user's readme.
 ## Screenshot {: # screenshot }
-![Screenshot] ("/screenshot.png")## Installation {: # installation }
-"This application requires an npm install of Inquirer.js."{: # installation }
-## Usage {: # usage }
-"After installing the required modules and opening the script.js in node, the user will be be presented with a series of questions about their project. The user will be asked to enter their project name, description, relative filepath to their screenshot link, GitHub username, email, installation requirements, usage, license, contributors, tests, and questions. Once all of the information is entered, the application will take the user's input and write a markdown file based on the responses, thereby generating the user's readme file."
-## Contributors {: # contributors }
-"N/A"
-## Tests {: # tests }
-"N/A"
-## Questions {: # questions }
-"N/A"
-## License {: # license }
+![Screenshot] (screenshot.png) 
+## Installation
+After installing the required modules and opening the script.js in node, the user will be be presented with a series of questions about their project. The user will be asked to enter their project name, description, relative filepath to their screenshot link, GitHub username, email, installation requirements, usage, license, contributors, tests, and questions. Once all of the information is entered, the application will take the user's input and write a markdown file based on the responses, thereby generating the user's readme file.
+## Usage
+N/A
+## Contributors
+N/A
+## Tests
+N/A
+## Questions
+N/A
+## License
 MIT License
 
 Copyright (c) 2020 Levi Robischon
