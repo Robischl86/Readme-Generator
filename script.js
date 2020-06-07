@@ -16,7 +16,7 @@ inquirer
     },
     {
       type: "input",
-      message: "Please enter the relative filepath of your screenshot link: ",
+      message: "Please enter the filename of your screenshot: ",
       name: "screenshot"
     },
     {
@@ -41,7 +41,7 @@ inquirer
     },
     {
       type: "input",
-      message: "Please enter the relative filepath of your license document: ",
+      message: "Please enter the filename of your license document: ",
       name: "license"
     },
     {
@@ -86,9 +86,11 @@ inquirer
 
     let questions = response.questions;
 
-    let filename = response.title.split(' ').join('_') + ".md";
+    let filename = response.title.split(' ').join('-') + ".md";
 
-    fs.writeFile(filename, ("# " + projectTitle), function (err) {
+    let screenshotLink = ("https://github.com/" + username + "/" + filename + "/blob/master/" + screenshot)
+
+    fs.writeFile(filename, ("# " + projectTitle + `\n`), function (err) {
       if (err) {
         return console.log(err);
       }
@@ -107,13 +109,13 @@ inquirer
       }
     }
 
-    fs.appendFileSync(filename, ("## Description {: # description }" + `\n` + description + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("## Description" + `\n` + description + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    fs.appendFileSync(filename, ("## Screenshot {: # screenshot }" + `\n` + `![Screenshot] (` + screenshot + `) \n`)), function (err) {
+    fs.appendFileSync(filename, ("## Screenshot" + `\n` + `![Screenshot] (` + screenshotLink + `) \n`)), function (err) {
       if (err) {
         return console.log(err);
       }

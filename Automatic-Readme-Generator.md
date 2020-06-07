@@ -1,4 +1,5 @@
-# Automatic Readme Generatory Robischl86
+# Automatic Readme Generator
+ Robischl86
 ## Table of Contents
 [Description](#description)
 [Screenshot](#screenshot)
@@ -7,10 +8,10 @@
 [License](#license)
 [Contributors](#contributors)
 [Tests](#tests)
-[Questions](#questions)## Description {: # description }
+[Questions](#questions)## Description
 This application uses the Node.js File System and Inquirer modules to create a clean and responsive readme file based. After running the script in the node terminal, the user is presented with a series of prompts relating to their project. The application then writes the information into a markdown file to be used as the user's readme.
-## Screenshot {: # screenshot }
-![Screenshot] (screenshot.png) 
+## Screenshot
+![Screenshot] (https://github.com/Robischl86/Automatic-Readme-Generator.md/blob/master/screenshot.png) 
 ## Installation
 This application requires an npm install of Inquirer.js.
 ## Usage
