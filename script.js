@@ -16,7 +16,7 @@ inquirer
     },
     {
       type: "input",
-      message: "Screenshot Link: ",
+      message: "Please enter the relative filepath of your screenshot link: ",
       name: "screenshot"
     },
     {
@@ -36,12 +36,12 @@ inquirer
     },
     {
       type: "input",
-      message: "Usage: ",
+      message: "Usage instructions: ",
       name: "usage"
     },
     {
       type: "input",
-      message: "License: ",
+      message: "Please enter the relative filepath of your license document: ",
       name: "license"
     },
     {
@@ -64,52 +64,41 @@ inquirer
   .then(function(response) {
     console.log(response);
 
-    let projectTitle = JSON.stringify(response.title);
-    projectTitle.id = "projectTitle";
+    let projectTitle = response.title;
 
-    let description = JSON.stringify(response.description);
-    description.id = "description";
+    let description = response.description;
 
-    let screenshot = JSON.stringify(response.screenshot);
-    console.log(screenshot)
+    let screenshot = response.screenshot;
 
-    let username = JSON.stringify(response.username);
-    username.id = "username";
+    let username = response.username;
 
-    let email = JSON.stringify(response.email);
-    email.id = "email"
+    let email = response.email;
 
-    let installation = JSON.stringify(response.installation);
+    let installation = response.installation;
 
-    let usage = JSON.stringify(response.usage);
+    let usage = response.usage;
 
-    let license = JSON.stringify(response.license);
+    let license = response.license;
 
-    let contributors = JSON.stringify(response.contributors);
+    let contributors = response.contributors;
 
-    let tests = JSON.stringify(response.tests);
+    let tests = response.tests;
 
-    let questions = JSON.stringify(response.questions);
-
-
+    let questions = response.questions;
 
     console.log(projectTitle);
     console.log(description);
     console.log(username);
     console.log(email);
 
-
     let filename = response.title.split(' ').join('_') + ".md";
 
-
-
-    fs.writeFile(filename, ("## " + projectTitle + `\n`), function (err) {
+    fs.writeFile(filename, ("# " + projectTitle + `\n`), function (err) {
       if (err) {
         return console.log(err);
       }
-      console.log("Success!");
+
     });
-//////////////////////////////////////////////
 
     fs.appendFileSync(filename, ("This project was created by " + username + `\n`)), function (err) {
       if (err) {
@@ -117,55 +106,69 @@ inquirer
       }
     }
 
-    fs.appendFileSync(filename, ("## " + description + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("## Table of Contents" + `\n` + '[Description](#description)' + `\n` + '[Screenshot](#screenshot)' + `\n` + '[Installation](#installation)' + `\n` + '[Usage](#usage)' + `\n` + '[License](#license)' + `\n` + '[Contributors](#contributors)' + `\n` + '[Tests](#tests)' + `\n` + '[Questions](#questions)')), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    fs.appendFileSync(filename, ("<img src=screenshot />")), function (err) {
+    fs.appendFileSync(filename, ("## Description {: # description }" + `\n` + description + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    fs.appendFileSync(filename, ("## Installation: " + installation + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("## Screenshot {: # screenshot }" + `\n` + `![Screenshot] (` + screenshot + `) \n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    fs.appendFileSync(filename, ("## Usage: " + usage + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("## Installation" + `\n` + installation + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    fs.appendFileSync(filename, ("## License: " + license + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("## Usage" + `\n` + usage + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    fs.appendFileSync(filename, ("## Contributors: " + contributors + `\n`)), function (err) {
+    fs.readFile(license, "utf8", function(error, info) {
+
+      if (error) {
+        return console.log(error);
+      }
+
+      fs.appendFileSync(filename, ("## License" + `\n` + info + `\n`)), function (err) {
+        if (err) {
+          return console.log(err);
+        }
+      }
+    
+    });
+
+    fs.appendFileSync(filename, ("## Contributors" + `\n` + contributors + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    fs.appendFileSync(filename, ("## Tests: " + tests + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("## Tests" + `\n` + tests + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    fs.appendFileSync(filename, ("## Questions: " + questions + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("## Questions" + `\n` + questions + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
+    console.log("Success!");
   });
 
 
-  //refer to 18:58 on May 13 vid, activity 14 for week 8
