@@ -6,6 +6,16 @@ inquirer
 
     {
       type: "input",
+      message: "GitHub Username: ",
+      name: "username"
+    },
+    {
+      type: "input",
+      message: "Please enter the name of your remote repository: ",
+      name: "repository"
+    },
+    {
+      type: "input",
       message: "Project Title: ",
       name: "title"
     },
@@ -21,17 +31,12 @@ inquirer
     },
     {
       type: "input",
-      message: "GitHub Username: ",
-      name: "username"
-    },
-    {
-      type: "input",
       message: "Email: ",
       name: "email"
     },
     {
       type: "input",
-      message: "Installation: ",
+      message: "Installation requirements: ",
       name: "installation"
     },
     {
@@ -66,6 +71,8 @@ inquirer
 
     let projectTitle = response.title;
 
+    let repository = response.repository;
+
     let description = response.description;
 
     let screenshot = response.screenshot;
@@ -88,22 +95,20 @@ inquirer
 
     let filename = response.title.split(' ').join('-') + ".md";
 
-    let screenshotLink = ("https://github.com/" + username + "/" + filename + "/blob/master/" + screenshot)
-
-    fs.writeFile(filename, ("# " + projectTitle + `\n`), function (err) {
+    fs.writeFileSync(filename, ("# " + projectTitle + `\n`), function (err) {
       if (err) {
         return console.log(err);
       }
 
     });
 
-    fs.appendFileSync(filename, ("\n This project was created by " + username + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("This project was created by " + username + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    fs.appendFileSync(filename, ("## Table of Contents" + `\n` + '[Description](#description)' + `\n` + '[Screenshot](#screenshot)' + `\n` + '[Installation](#installation)' + `\n` + '[Usage](#usage)' + `\n` + '[License](#license)' + `\n` + '[Contributors](#contributors)' + `\n` + '[Tests](#tests)' + `\n` + '[Questions](#questions)')), function (err) {
+    fs.appendFileSync(filename, ("## Table of Contents" + `\n` + `1. [Description](#description) \n 2. [Screenshot](#screenshot) \n 3. [Installation](#installation) \n 4. [Usage](#usage) \n 5. [License](#license) \n 6. [Contributors](#contributors) \n 7. [Tests](#tests) \n 8. [Questions](#questions) \n`)), function (err) {
       if (err) {
         return console.log(err);
       }
@@ -115,7 +120,7 @@ inquirer
       }
     }
 
-    fs.appendFileSync(filename, ("## Screenshot" + `\n` + `![Screenshot] (` + screenshotLink + `) \n`)), function (err) {
+    fs.appendFileSync(filename, ("## Screenshot" + `\n` + `![Screenshot](` + screenshot + `?raw=true) \n`)), function (err) {
       if (err) {
         return console.log(err);
       }
