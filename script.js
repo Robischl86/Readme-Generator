@@ -86,21 +86,16 @@ inquirer
 
     let questions = response.questions;
 
-    console.log(projectTitle);
-    console.log(description);
-    console.log(username);
-    console.log(email);
-
     let filename = response.title.split(' ').join('_') + ".md";
 
-    fs.writeFile(filename, ("# " + projectTitle + `\n`), function (err) {
+    fs.writeFile(filename, ("# " + projectTitle), function (err) {
       if (err) {
         return console.log(err);
       }
 
     });
 
-    fs.appendFileSync(filename, ("This project was created by " + username + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("\n This project was created by " + username + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
