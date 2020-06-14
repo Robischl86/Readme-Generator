@@ -1,6 +1,9 @@
 var inquirer = require("inquirer");
 const fs = require("fs");
+let filename = "./generatedREADME.md"
 
+
+function generateREADME() {
 inquirer
   .prompt([
 
@@ -8,11 +11,6 @@ inquirer
       type: "input",
       message: "GitHub Username: ",
       name: "username"
-    },
-    {
-      type: "input",
-      message: "Please enter the name of your remote repository: ",
-      name: "repository"
     },
     {
       type: "input",
@@ -31,11 +29,6 @@ inquirer
     },
     {
       type: "input",
-      message: "Email: ",
-      name: "email"
-    },
-    {
-      type: "input",
       message: "Installation requirements: ",
       name: "installation"
     },
@@ -43,11 +36,6 @@ inquirer
       type: "input",
       message: "Usage instructions: ",
       name: "usage"
-    },
-    {
-      type: "input",
-      message: "Please enter the filename of your license document: ",
-      name: "license"
     },
     {
       type: "input",
@@ -60,9 +48,9 @@ inquirer
       name: "tests"
     },
     {
-      type: "input",
-      message: "Questions: ",
-      name: "questions"
+      type: 'confirm',
+      message: 'Add a question?',
+      name: 'confirm'
     }
 
   ])
@@ -71,36 +59,26 @@ inquirer
 
     let projectTitle = response.title;
 
-    let repository = response.repository;
-
     let description = response.description;
 
     let screenshot = response.screenshot;
 
     let username = response.username;
 
-    let email = response.email;
-
     let installation = response.installation;
 
     let usage = response.usage;
-
-    let license = response.license;
 
     let contributors = response.contributors;
 
     let tests = response.tests;
 
-    let questions = response.questions;
-
-    let filename = response.title.split(' ').join('-') + ".md";
-
-    fs.writeFileSync(filename, ("# " + projectTitle + `\n`), function (err) {
+    fs.writeFile(filename, ("# " + projectTitle + `\n`), function (err) {
       if (err) {
         return console.log(err);
       }
 
-    });
+
 
     fs.appendFileSync(filename, ("This project was created by " + username + `\n`)), function (err) {
       if (err) {
@@ -138,19 +116,21 @@ inquirer
       }
     }
 
-    fs.readFile(license, "utf8", function(error, info) {
+    fs.readFile("license.txt", "utf8", function(error, info) {
 
       if (error) {
         return console.log(error);
       }
-
       fs.appendFileSync(filename, ("## License" + `\n` + info + `\n`)), function (err) {
         if (err) {
           return console.log(err);
         }
       }
-    
+
+
     });
+
+
 
     fs.appendFileSync(filename, ("## Contributors" + `\n` + contributors + `\n`)), function (err) {
       if (err) {
@@ -164,13 +144,99 @@ inquirer
       }
     }
 
-    fs.appendFileSync(filename, ("## Questions" + `\n` + questions + `\n`)), function (err) {
+    fs.appendFileSync(filename, ("## Questions" + `\n`)), function (err) {
       if (err) {
         return console.log(err);
       }
     }
 
-    console.log("Success!");
   });
+    if(response.confirm){
+      askQuestion();
+    }
+    else {
+      console.log("Success!")
+    }
+  });
+};
 
 
+function askQuestion() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Question: ',
+      name: 'question',
+    },
+    {
+      type: 'input',
+      message: 'Answer: ',
+      name: 'answer',
+    },
+    {
+      type: 'confirm',
+      message: 'Add another question? ',
+      name: 'confirm',
+    }
+  ]).then(function(FAQ){
+
+    console.log(FAQ);
+    fs.appendFileSync(filename, ("Q: " + FAQ.question + `\n`)), function (err) {
+      if (err) {
+        return console.log(err);
+      }
+    }
+    fs.appendFileSync(filename, ("A: " + FAQ.answer + `\n` + `\n`)), function (err) {
+      if (err) {
+        return console.log(err);
+      }
+    }
+    if(FAQ.confirm){
+      askAnotherQ();
+    }
+    else {
+      console.log("Success!")
+    }
+  });
+}
+
+function askAnotherQ() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Question: ',
+      name: 'question',
+    },
+    {
+      type: 'input',
+      message: 'Answer: ',
+      name: 'answer',
+    },
+    {
+      type: 'confirm',
+      message: 'Add another question? ',
+      name: 'confirm',
+    }
+  ]).then(function(anotherQ){
+
+    console.log(anotherQ);
+    fs.appendFileSync(filename, ("Q: " + anotherQ.question + `\n`)), function (err) {
+      if (err) {
+        return console.log(err);
+      }
+    }
+    fs.appendFileSync(filename, ("A: " + anotherQ.answer + `\n` + `\n`)), function (err) {
+      if (err) {
+        return console.log(err);
+      }
+    }
+    if(anotherQ.confirm){
+      askQuestion();
+    }
+    else {
+      console.log("Success!")
+    }
+  });
+}
+
+generateREADME();
