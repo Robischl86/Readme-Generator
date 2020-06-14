@@ -22,6 +22,14 @@ After installing the required modules and opening the script.js in node, the use
 ## Tests
 
 ## Questions
+Q: How do I run the application?
+A: Run the file script.js from the command line.
+
+Q: Will the application automatically save my markdown file upon completion?
+A: It will write the content of the readme into a markdown file called generatedREADME.md. However, the application will overwrite any previous content every time you run it, so be sure to save your work.
+
+Q: How do I provide my license text?
+A: License text must be entered into a text file called license.txt. Every time the application is run, it will read the license.txt file and append its contents to the markdown.
 
 ## License
 MIT License
