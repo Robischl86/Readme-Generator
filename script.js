@@ -78,8 +78,6 @@ inquirer
         return console.log(err);
       }
 
-
-
     fs.appendFileSync(filename, ("This project was created by " + username + `\n`)), function (err) {
       if (err) {
         return console.log(err);
@@ -116,20 +114,6 @@ inquirer
       }
     }
 
-    fs.readFile("license.txt", "utf8", function(error, info) {
-
-      if (error) {
-        return console.log(error);
-      }
-      fs.appendFileSync(filename, ("## License" + `\n` + info + `\n`)), function (err) {
-        if (err) {
-          return console.log(err);
-        }
-      }
-
-
-    });
-
 
 
     fs.appendFileSync(filename, ("## Contributors" + `\n` + contributors + `\n`)), function (err) {
@@ -155,7 +139,7 @@ inquirer
       askQuestion();
     }
     else {
-      console.log("Success!")
+      license();
     }
   });
 };
@@ -195,7 +179,7 @@ function askQuestion() {
       askAnotherQ();
     }
     else {
-      console.log("Success!")
+      license();
     }
   });
 }
@@ -234,8 +218,23 @@ function askAnotherQ() {
       askQuestion();
     }
     else {
-      console.log("Success!")
+      license();
     }
+  });
+}
+
+function license() {
+  fs.readFile("license.txt", "utf8", function(error, info) {
+
+    if (error) {
+      return console.log(error);
+    }
+    fs.appendFileSync(filename, ("## License" + `\n` + info + `\n`)), function (err) {
+      if (err) {
+        return console.log(err);
+      }
+    }
+    console.log("Success!")
   });
 }
 
